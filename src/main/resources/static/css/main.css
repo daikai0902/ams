@@ -1,0 +1,29 @@
+.head-cont{width: 100%}
+.hpanel{border: 0;box-shadow: none;margin-bottom: 25px}
+.hpanel-body{background: #fff;border: 1px solid #e4e5e7;border-radius: 2px;padding: 20px;position: relative;}
+
+
+
+.toper-form {padding:20px;padding-bottom: 0;}
+.toper-form .book-img {width: 88px;height: 128px;}
+.toper-form .form-group{margin: 20px 0;}
+.toper-form .lab{width: 100px;text-align: right;color: #555;display: inline-block;margin-right: 10px;font-size:14px;}
+.toper-form .inb{display: inline-block;vertical-align:middle;}
+.toper-form .ipt, .toper-form .sel{padding: 4px 6px;width: 240px;}
+.toper-form .tarea{margin: 0px; width: 253px;height: 80px;}
+.toper-form .radio-list li{float: left;margin-right: 15px;}
+.toper-form .chk{cursor: pointer;}
+.toper-form .tip{font-size:14px;}
+.toper-form .tip-g{color: #999;}
+.toper-form .title{text-align: center; font-size: 16px;color: #555;}
+.toper-form .wa{width: inherit;}
+.toper-form .w300 .ipt, .toper-form .w300 .sel{width: 300px;}
+.toper-form .btn{height: 22px; line-height: 22px !important; background-color: #6C96C5; color: #fff; border: none;}
+.toper-form .btn:hover{background-color: #9db9d8;}
+
+
+.layui-btn-xs {height: 22px;line-height: 22px;padding: 0 5px;font-size: 12px;}
+
+.jk-cont{border: 1px solid #eee;margin-left: 250px;padding: 15px}
+.jk-cont h4{font-weight: 600;font-size: 18px;font-family: inherit;color: #6a6c6f;}
+.hr{margin-top: 20px;margin-bottom: 20px;border: 0;border-top: 1px solid #eee;}
