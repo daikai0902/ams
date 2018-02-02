@@ -26,4 +26,7 @@
 
 .jk-cont{border: 1px solid #eee;margin-left: 250px;padding: 15px}
 .jk-cont h4{font-weight: 600;font-size: 18px;font-family: inherit;color: #6a6c6f;}
-.hr{margin-top: 20px;margin-bottom: 20px;border: 0;border-top: 1px solid #eee;}
+
+
+.base-cont{border: 1px solid #eee;padding: 15px}
+.layui-nav-item i {margin-right: 10px;font-size: 15px}

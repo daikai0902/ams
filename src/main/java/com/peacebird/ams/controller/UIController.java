@@ -52,26 +52,68 @@ public class UIController {
 
 
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("index");
         return modelAndView;
     }
 
 
-    @RequestMapping("/my/pro")
+    @GetMapping("/my/pro")
     public ModelAndView myPro(){
         ModelAndView modelAndView = new ModelAndView("myPro");
         return modelAndView;
     }
 
 
-    @RequestMapping("/join/pro")
+    @GetMapping("/join/pro")
     public ModelAndView joinPro(){
         ModelAndView modelAndView = new ModelAndView("joinPro");
         return modelAndView;
     }
+
+
+
+    @GetMapping("/pro/menu")
+    public ModelAndView projectLeftMenu(){
+        ModelAndView modelAndView = new ModelAndView("projectMenu");
+        return modelAndView;
+    }
     
+    
+    @GetMapping("/pro/base/info/{proId}")
+    public ModelAndView baseInfo(@PathVariable Integer proId){
+        ModelAndView modelAndView = new ModelAndView("baseInfo");
+        Project project = projectService.selectById(proId);
+        modelAndView.addObject("project",project);
+        return modelAndView;
+    }
+
+
+    @GetMapping("/pro/role/{proId}")
+    public ModelAndView roleManege(@PathVariable Integer proId){
+        ModelAndView modelAndView = new ModelAndView("roleManage");
+        Project project = projectService.selectById(proId);
+        modelAndView.addObject("project",project);
+        return modelAndView;
+    }
+
+
+
+    @GetMapping("/pro/member/{proId}")
+    public ModelAndView memberManege(@PathVariable Integer proId){
+        ModelAndView modelAndView = new ModelAndView("memberManage");
+        Project project = projectService.selectById(proId);
+        modelAndView.addObject("project",project);
+        return modelAndView;
+    }
+
+
+    
+    /**
+     * 接口管理
+     * @Date: 13:56 2018/2/1
+     */
     @GetMapping("/pro/api/manage/{proId}")
     public ModelAndView apiManage(@PathVariable Integer proId){
         ModelAndView modelAndView = new ModelAndView("apiManage");
@@ -81,6 +123,18 @@ public class UIController {
     }
 
 
+
+
+    
+    /**
+     * 消息中心
+     * @Date: 17:18 2018/2/1
+     */
+    @GetMapping("/message")
+    public ModelAndView messageCenter(){
+        ModelAndView modelAndView = new ModelAndView("messageCenter");
+        return modelAndView;
+    }
 
 
 

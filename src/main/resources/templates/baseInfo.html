@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>太平鸟API管理平台</title>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+
+
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"  media="all" />
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+</head>
+<body>
+
+<div class="layui-layout layui-layout-admin">
+    <div th:replace="projectMenu::top-menu"></div>
+
+    <div th:replace="projectMenu::left-menu(1,${project.id})"></div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+
+            <blockquote class="layui-elem-quote" th:text="${project.name}"></blockquote>
+
+
+            <div class="base-cont">
+                <form class="layui-form">
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">项目名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title"   lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" />
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">项目状态</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="switch" lay-skin="switch" lay-text="开启|关闭" />
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">项目描述</label>
+                        <div class="layui-input-block">
+                            <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+
+
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn">保存</button>
+                        </div>
+                    </div>
+
+
+
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © peacebird.com - 太平鸟平台组API管理中心
+    </div>
+</div>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/js/main.js}" charset="utf-8"></script>
+
+
+</body>
+</html>

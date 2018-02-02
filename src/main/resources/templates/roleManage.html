@@ -9,67 +9,17 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="format-detection" content="telephone=no" />
+
+
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}"  media="all" />
     <link rel="stylesheet" th:href="@{/css/main.css}" />
-
 </head>
 <body>
 
 <div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-logo" style="color: white;">太平鸟API管理平台</div>
-        <ul class="layui-nav  layui-layout-left">
-            <li class="layui-nav-item">
-                <a href="">控制台</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">项目管理</a></dd>
-                    <dd><a href="">接口管理</a></dd>
-                    <dd><a href="">接口测试</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="">最新消息<span class="layui-badge-dot"></span></a>
-            </li>
-            <li class="layui-nav-item">
-                <a href="">个人中心</a>
-            </li>
+    <div th:replace="projectMenu::top-menu"></div>
 
-        </ul>
-        <ul class="layui-nav  layui-layout-right">
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <img th:src="@{/img/head.png}" class="layui-nav-img" />
-                    <span th:text="${curUser.getUsername()}"></span>
-                </a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">密码重置</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item"><a th:href="@{/user/logout}" href="">退出</a></li>
-        </ul>
-    </div>
-
-    <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">项目管理</a>
-                    <dl class="layui-nav-child">
-                        <dd class="layui-this"><a href="javascript:;">已创建项目</a></dd>
-                        <dd><a href="javascript:;">已加入项目</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">接口管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">接口权限配置</a></dd>
-                    </dl>
-                </li>
-
-            </ul>
-        </div>
-    </div>
+    <div th:replace="projectMenu::left-menu(2,${project.id})"></div>
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
@@ -80,13 +30,17 @@
                     </div>
                     <div class="hpanel-body">
                         <div class="form-group">
-                            项目名称：
-                            <div class="layui-inline">
-                                <input class="layui-input" name="id" id="demoReload" autocomplete="off" />
+                            角色名称：
+                            <div class="layui-inline" style="margin-right: 20px">
+                                <input class="layui-input" name="id" id="roleName" autocomplete="off" />
                             </div>
-                            <button class="layui-btn js-search-pro" data-type="reload">搜索</button>
+                            角色编码：
+                            <div class="layui-inline">
+                                <input class="layui-input" name="id" id="roleCode" autocomplete="off" />
+                            </div>
+                            <button class="layui-btn js-search-role" data-type="reload">搜索</button>
 
-                            <button class="layui-btn js-add-pro" style="float: right">新增项目</button>
+                            <button class="layui-btn js-add-role" style="float: right">新增角色</button>
                         </div>
                     </div>
                 </div>
@@ -110,18 +64,9 @@
         © peacebird.com - 太平鸟平台组API管理中心
     </div>
 </div>
-
-
-
-
 <script th:src="@{/layui/layui.js}" charset="utf-8"></script>
 <script th:src="@{/js/main.js}" charset="utf-8"></script>
 
-<script type="text/html" id="my-pro-bar">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">详情</a>
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-</script>
 
 <script>
     layui.use('table', function(){
@@ -132,12 +77,11 @@
             elem: '#my-pro-table'
             ,url: '/project/my/list/'
             ,cols: [[
-                 {field:'id',type:'numbers', title: 'ID', width:20, fixed: true}
-                ,{field:'name', title: '项目名称', width:225}
-                ,{field:'status', title: '项目状态', width:108, sort: true}
+                {field:'name', title: '角色名称', width:225}
+                ,{field:'name', title: '状态', width:225}
+                ,{field:'status', title: '角色编码', width:108, sort: true}
                 ,{field:'createTime', title: '创建时间', width:144}
-                ,{field:'describes', title: '项目描述',width:200}
-                ,{width:300, align:'center', toolbar: '#my-pro-bar'}
+                ,{field:'describes', title: '角色描述',width:300}
 
             ]]
             ,id: 'testReload'
@@ -158,7 +102,7 @@
                     }
                     ,where: {
 
-                            projectName: demoReload.val()
+                        projectName: demoReload.val()
 
                     }
                 });
@@ -191,7 +135,6 @@
         });
     });
 </script>
-
 
 
 </body>
