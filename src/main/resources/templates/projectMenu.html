@@ -10,11 +10,11 @@
                 <a href="javascript:;">控制台</a>
                 <dl class="layui-nav-child">
                     <dd><a href="/">项目管理</a></dd>
-                    <dd><a href="">接口管理</a></dd>
+                    <dd><a href="">接口测试</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a href="/message">最新消息<span class="layui-badge-dot"></span></a>
+                <a href="/ams/message">最新消息<span class="layui-badge-dot"></span></a>
             </li>
             <li class="layui-nav-item">
                 <a href="">个人中心</a>
@@ -24,7 +24,7 @@
         <ul class="layui-nav  layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img th:src="@{/img/head.png}" class="layui-nav-img" />
+                    <img th:src="@{/img/userface1.jpg}" class="layui-nav-img" />
                     <span th:text="${curUser.getUsername()}"></span>
                 </a>
                 <dl class="layui-nav-child">
@@ -45,19 +45,46 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item" th:classappend="${index == 1?'layui-this':''}">
-                    <a th:href="'/pro/base/info/'+${proId}">项目基本信息</a>
+                    <a th:href="'/ams/pro/base/info/'+${proId}"><i class="iconfont icon-menu1" data-icon="icon-star"></i>项目基本信息</a>
                 </li>
                 <li class="layui-nav-item" th:classappend="${index == 2?'layui-this':''}">
-                    <a th:href="'/pro/role/'+${proId}">项目角色</a>
+                    <a th:href="'/ams/pro/role/'+${proId}"><i class="iconfont icon-huanfu" data-icon="icon-dengji1"></i>项目角色</a>
                 </li>
                 <li class="layui-nav-item" th:classappend="${index == 3?'layui-this':''}">
-                    <a th:href="'/pro/member/'+${proId}">项目成员</a>
+                    <a th:href="'/ams/pro/member/'+${proId}"><i class="iconfont icon-dongtaifensishu" data-icon="icon-dengji1"></i>项目成员</a>
                 </li>
                 <li class="layui-nav-item" th:classappend="${index == 4?'layui-this':''}" >
-                    <a th:href="'/pro/api/manage/'+${proId}">接口管理</a>
+                    <a th:href="'/ams/pro/api/manage/'+${proId}"><i class="iconfont icon-edit" data-icon="icon-dengji1"></i>接口管理</a>
                 </li>
                 <li class="layui-nav-item" th:classappend="${index == 5?'layui-this':''}" >
-                    <a th:href="'/pro/api/manage/'+${proId}">接口权限配置</a>
+                    <a th:href="'/ams/pro/api/manage/'+${proId}"><i class="iconfont icon-shezhi1" data-icon="icon-dengji1"></i>接口权限配置</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div th:fragment="pc-menu(index)" class="layui-side layui-bg-black">
+
+        <div class="user-photo">
+            <a class="img" title="我的头像"><img th:src="@{/img/userface1.jpg}" /></a>
+            <p>你好！<span class="userName" th:text="${curUser.getUsername()}"></span>, 欢迎登录</p>
+        </div>
+
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item" th:classappend="${index == 1?'layui-this layui-nav-itemed':''}">
+                    <a class="" th:href="@{/}"><i class="iconfont icon-computer" data-icon="icon-computer"></i>首页</a>
+                </li>
+                <li class="layui-nav-item" th:classappend="${(index == 4 || index==2||index ==3)?'layui-nav-itemed':''}">
+                    <a class="" href="javascript:;"><i class="iconfont icon-text" data-icon="icon-text"></i>项目管理</a>
+                    <dl class="layui-nav-child">
+                        <dd th:classappend="${index == 2?'layui-this':''}"><a th:href="@{/ams/pro/me}"><i class="iconfont icon-star" data-icon="icon-star"></i>我创建的项目</a></dd>
+                        <dd th:classappend="${index == 3?'layui-this':''}"><a th:href="@{/ams/pro/join}"><i class="iconfont icon-caozuo" data-icon="icon-caozuo"></i>我加入的项目</a></dd>
+                        <dd th:classappend="${index == 4?'layui-this':''}"><a th:href="@{/ams/pro/join}"><i class="iconfont icon-lock1" data-icon="icon-lock1"></i>归档的项目</a></dd>
+                    </dl>
                 </li>
             </ul>
         </div>

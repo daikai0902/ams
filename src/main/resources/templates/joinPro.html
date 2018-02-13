@@ -16,10 +16,9 @@
 <body>
 
 <div class="layui-layout layui-layout-admin">
-
     <div th:replace="projectMenu::top-menu"></div>
 
-    <div th:replace="projectMenu::pc-menu(2)"></div>
+    <div th:replace="projectMenu::pc-menu(3)"></div>
 
 
     <div class="layui-body">
@@ -121,7 +120,7 @@
         table.on('tool(pro-filter)', function(obj){
             var data = obj.data;
             if(obj.event === 'detail'){
-                window.location.href = "/ams/pro/base/info/"+data.id;
+                window.location.href = "/ams/pro/api/manage/"+data.id;
             } else if(obj.event === 'del'){
                 layer.confirm('真的删除行么', function(index){
                     obj.del();

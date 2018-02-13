@@ -17,61 +17,166 @@
 <body>
 
 <div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-logo" style="color: white;">太平鸟API管理平台</div>
-        <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav  layui-layout-left">
-            <li class="layui-nav-item">
-                <a href="">控制台</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">项目管理</a></dd>
-                    <dd><a href="">接口管理</a></dd>
-                    <dd><a href="">接口测试</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="/message">最新消息<span class="layui-badge-dot"></span></a>
-            </li>
+    <div th:replace="projectMenu::top-menu"></div>
 
-        </ul>
-        <ul class="layui-nav  layui-layout-right">
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <img th:src="@{/img/head.png}" class="layui-nav-img" />
-                    <span th:text="${curUser.getUsername()}"></span>
-                </a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">密码重置</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item"><a th:href="@{/user/logout}" href="">退出</a></li>
-        </ul>
-    </div>
-
-    <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;"><i class="layui-icon">&#xe68e;</i>首页</a>
-                </li>
-                <li class="layui-nav-item">
-                    <a class="" href="javascript:;"><i class="layui-icon">&#xe63c;</i>项目管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a th:href="@{/my/pro}">已创建项目</a></dd>
-                        <dd><a href="javascript:;">已加入项目</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a class="" href="javascript:;"><i class="layui-icon">&#xe613;</i>个人中心</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <div th:replace="projectMenu::pc-menu(1)"></div>
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div style="padding: 15px;">
+        <div style="margin: 10px 10px 0">
+
+
+
+            <div class="panel_box row">
+                <div class="panel col">
+                    <a href="javascript:;" data-url="page/message/message.html">
+                        <div class="panel_icon">
+                            <i class="layui-icon" data-icon="&#xe63a;">&#xe63a;</i>
+                        </div>
+                        <div class="panel_word newMessage">
+                            <span>3</span>
+                            <cite>新消息</cite>
+                        </div>
+                    </a>
+                </div>
+                <div class="panel col">
+                    <a href="javascript:;" data-url="page/user/allUsers.html">
+                        <div class="panel_icon" style="background-color:#FF5722;">
+                            <i class="iconfont icon-dongtaifensishu" data-icon="icon-dongtaifensishu"></i>
+                        </div>
+                        <div class="panel_word userAll">
+                            <span>3</span>
+                            <cite>新增人数</cite>
+                        </div>
+                    </a>
+                </div>
+                <div class="panel col">
+                    <a href="javascript:;" data-url="page/user/allUsers.html">
+                        <div class="panel_icon" style="background-color:#009688;">
+                            <i class="layui-icon" data-icon="&#xe613;">&#xe613;</i>
+                        </div>
+                        <div class="panel_word userAll">
+                            <span>223</span>
+                            <cite>用户总数</cite>
+                        </div>
+                    </a>
+                </div>
+                <div class="panel col">
+                    <a href="javascript:;" data-url="page/img/images.html">
+                        <div class="panel_icon" style="background-color:#5FB878;">
+
+                            <i class="iconfont icon-link" data-icon="icon-link"></i>
+                        </div>
+                        <div class="panel_word imgAll">
+                            <span>33</span>
+                            <cite>接口总数</cite>
+                        </div>
+                    </a>
+                </div>
+                <div class="panel col">
+                    <a href="javascript:;" data-url="page/news/newsList.html">
+                        <div class="panel_icon" style="background-color:#F7B824;">
+                            <i class="iconfont icon-wenben" data-icon="icon-wenben"></i>
+                        </div>
+                        <div class="panel_word waitNews">
+                            <span>22</span>
+                            <cite>项目总数</cite>
+                        </div>
+                    </a>
+                </div>
+                <div class="panel col max_panel">
+                    <a href="javascript:;" data-url="page/news/newsList.html">
+                        <div class="panel_icon" style="background-color:#2F4056;">
+                            <i class="iconfont icon-text" data-icon="icon-text"></i>
+                        </div>
+                        <div class="panel_word allNews">
+                            <span>4343</span>
+                            <em>文章总数</em>
+                            <cite>文章列表</cite>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="sysNotice col">
+                    <blockquote class="layui-elem-quote title">更新日志</blockquote>
+                    <div class="layui-elem-quote layui-quote-nm">
+                        <h3># v1.0.0（部署） - 2018-02-11</h3>
+                        <p style="color:#f00;">* 第一版API管理平台正式上线啦！！！</p>
+                        <br />
+                        <p># v1.0.1（新增） - 2017-02-11</p>
+                        <p>* 增加 "项目管理功能"，接口权限引入oauth2.0机制</p>
+                    </div>
+                </div>
+                <div class="sysNotice col">
+                    <blockquote class="layui-elem-quote title">系统基本参数</blockquote>
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="150" />
+                            <col />
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <td>当前版本</td>
+                            <td class="version">v1.0.0</td>
+                        </tr>
+                        <tr>
+                            <td>开发作者</td>
+                            <td class="author">kevin.dai</td>
+                        </tr>
+                        <tr>
+                            <td>网站首页</td>
+                            <td class="homePage"></td>
+                        </tr>
+                        <tr>
+                            <td>服务器环境</td>
+                            <td class="server">Linux Centos</td>
+                        </tr>
+                        <tr>
+                            <td>数据库版本</td>
+                            <td class="dataBase">Mysql 5.5+</td>
+                        </tr>
+                        <tr>
+                            <td>最大上传限制</td>
+                            <td class="maxUpload">100M</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <blockquote class="layui-elem-quote title">最新文章<i class="iconfont icon-new1"></i></blockquote>
+                    <table class="layui-table" lay-skin="line">
+                        <colgroup>
+                            <col />
+                            <col width="110" />
+                        </colgroup>
+                        <tbody class="hot_news">
+                            <tr>
+                                <td align="left">SCM系统openAPI正式入驻平台</td>
+                                <td>2017-06-06</td>
+                            </tr>
+                            <tr>
+                                <td align="left">RFID系统openAPI正式入驻平台</td>
+                                <td>2017-02-22</td>
+                            </tr>
+                            <tr>
+                                <td align="left">DRP系统openAPI正式入驻平台</td>
+                                <td>2017-01-08</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
 
 
 
