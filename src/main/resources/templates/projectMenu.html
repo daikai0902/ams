@@ -51,13 +51,16 @@
                     <a th:href="'/ams/pro/role/'+${proId}"><i class="iconfont icon-huanfu" data-icon="icon-dengji1"></i>项目角色</a>
                 </li>
                 <li class="layui-nav-item" th:classappend="${index == 3?'layui-this':''}">
+                    <a th:href="'/ams/pro/auth/'+${proId}"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i>项目权限</a>
+                </li>
+                <li class="layui-nav-item" th:classappend="${index == 4?'layui-this':''}">
                     <a th:href="'/ams/pro/member/'+${proId}"><i class="iconfont icon-dongtaifensishu" data-icon="icon-dengji1"></i>项目成员</a>
                 </li>
-                <li class="layui-nav-item" th:classappend="${index == 4?'layui-this':''}" >
+                <li class="layui-nav-item" th:classappend="${index == 5?'layui-this':''}" >
                     <a th:href="'/ams/pro/api/manage/'+${proId}"><i class="iconfont icon-edit" data-icon="icon-dengji1"></i>接口管理</a>
                 </li>
-                <li class="layui-nav-item" th:classappend="${index == 5?'layui-this':''}" >
-                    <a th:href="'/ams/pro/api/manage/'+${proId}"><i class="iconfont icon-shezhi1" data-icon="icon-dengji1"></i>接口权限配置</a>
+                <li class="layui-nav-item" th:classappend="${index == 6?'layui-this':''}" >
+                    <a th:href="'/ams/pro/api/auth/'+${proId}"><i class="iconfont icon-shezhi1" data-icon="icon-dengji1"></i>接口权限配置</a>
                 </li>
             </ul>
         </div>

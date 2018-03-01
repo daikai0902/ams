@@ -9,8 +9,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="format-detection" content="telephone=no" />
-
-
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}"  media="all" />
     <link rel="stylesheet" th:href="@{/css/main.css}" />
 </head>
@@ -18,37 +16,20 @@
 
 <div class="layui-layout layui-layout-admin">
     <div th:replace="projectMenu::top-menu"></div>
-
-    <div th:replace="projectMenu::left-menu(4,${project.id})"></div>
-
+    <div th:replace="projectMenu::left-menu(3,${project.id})"></div>
     <div class="layui-body">
-        <!-- 内容主体区域 -->
         <div style="padding: 15px;">
-
             <div class="head-cont">
                 <div class="hpanel">
                     <div class="hpanel-head">
                     </div>
                     <div class="hpanel-body">
                         <div class="form-group">
-                            用户名：
+                            权限名称：
                             <div class="layui-inline" style="margin-right: 20px">
-                                <input class="layui-input" name="id" id="roleName" autocomplete="off" />
+                                <input class="layui-input" name="id" id="authName" autocomplete="off" />
                             </div>
-                            手机号：
-                            <div class="layui-inline" style="margin-right: 20px">
-                                <input class="layui-input" name="id" id="roleCode" autocomplete="off" />
-                            </div>
-                            邮箱：
-                            <div class="layui-inline" style="margin-right: 20px">
-                                <input class="layui-input" name="id" id="roleCode" autocomplete="off" />
-                            </div>
-
-
-
                             <button class="layui-btn js-search-role" data-type="reload">搜索</button>
-
-                            <button class="layui-btn js-add-role" style="float: right">邀请成员</button>
                         </div>
                     </div>
                 </div>
@@ -58,60 +39,78 @@
                     <div class="hpanel-head">
                     </div>
                     <div class="hpanel-body">
-                        <table class="layui-hide" id="my-pro-table" lay-filter="pro-filter">
+                        <div class="tb-btn-group">
+                            <button class="layui-btn layui-btn-small layui-btn-danger">删除</button>
+                            <button class="layui-btn layui-btn-small layui-btn-normal">禁用</button>
+                            <button class="layui-btn layui-btn-small js-add-authority">添加权限</button>
+                        </div>
+                        <table class="layui-hide" id="role-tb" lay-filter="pro-filter">
 
                         </table>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
-
     <div class="layui-footer">
         <!-- 底部固定区域 -->
         © peacebird.com - 太平鸟平台组API管理中心
     </div>
 </div>
+
+
+<script type="text/html" id="switchTpl">
+    <input type="checkbox" name="status"  lay-skin="switch" lay-text="启用|禁用"   />
+</script>
+
+<script type="text/html" id="my-pro-bar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
 <script th:src="@{/layui/layui.js}" charset="utf-8"></script>
 <script th:src="@{/js/main.js}" charset="utf-8"></script>
-<script>
+
+<script th:inline="javascript">
     layui.use('table', function(){
-        var table = layui.table;
+        var table = layui.table,
+            projectId = [[${project.id}]];
+
 
         //方法级渲染
         table.render({
-            elem: '#my-pro-table'
-            ,url: '/project/my/list1/'
+            elem: '#role-tb'
+            ,url: '/authpro/list?projectId='+projectId
             ,cols: [[
-                {field:'name', title: '用户名', width:225}
-                ,{field:'name', title: '手机号', width:225}
-                ,{field:'status', title: '邮箱', width:108, sort: true}
-                ,{field:'status', title: '角色', width:108, sort: true}
-                ,{field:'createTime', title: '加入时间', width:144}
-                ,{field:'describes', title: '操作',width:300}
+                {checkbox:true}
+                ,{type:'numbers'}
+                ,{field:'name', width:180, title: '权限名称'}
+                ,{field:'remark', width:380, title: '描述'}
+                ,{field:'status', width:105,align:'center', title: '状态',templet: '#switchTpl', unresize: true}
+                ,{width:300, align:'center',title: '操作', toolbar: '#my-pro-bar'}
 
             ]]
-            ,id: 'testReload'
+            ,id: 'authProReload'
             ,page: true
-            ,height: 315
+            ,height: 350
             ,limit:10
 
         });
 
         var $ = layui.$, active = {
             reload: function(){
-                var demoReload = $('#demoReload');
+                var authName = $('#authName');
 
                 //执行重载
-                table.reload('testReload', {
+                table.reload('authProReload', {
                     page: {
                         curr: 1 //重新从第 1 页开始
                     }
                     ,where: {
 
-                        projectName: demoReload.val()
+                        authorityName: authName.val()
 
                     }
                 });
@@ -123,7 +122,7 @@
         table.on('tool(pro-filter)', function(obj){
             var data = obj.data;
             if(obj.event === 'detail'){
-                window.location.href = "/pro/api/manage/"+data.id;
+                window.location.href = "/ams/pro/base/info/"+data.id;
             } else if(obj.event === 'del'){
                 layer.confirm('真的删除行么', function(index){
                     obj.del();
@@ -137,13 +136,14 @@
 
 
 
-
         $('.layui-body .js-search-pro').on('click', function(){
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
     });
 </script>
+
+
 
 </body>
 </html>

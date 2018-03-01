@@ -16,4 +16,10 @@ public interface IProjectService extends IService<Project> {
 
     int addProject(Project project);
 
+
+    int editProjectById(Project project);
+
+
+    Project selectById(Integer id);
+
 }

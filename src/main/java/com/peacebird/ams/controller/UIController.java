@@ -49,7 +49,10 @@ public class UIController {
 
 
 
-
+    /**
+     * 首页
+     * @Date: 10:03 2018/2/28
+     */
     @GetMapping("/")
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("index");
@@ -57,7 +60,11 @@ public class UIController {
     }
 
 
-
+    
+    /**
+     * 我创建的项目
+     * @Date: 10:03 2018/2/28
+     */
     @GetMapping("/ams/pro/me")
     public ModelAndView myPro(){
         ModelAndView modelAndView = new ModelAndView("myPro");
@@ -65,6 +72,11 @@ public class UIController {
     }
 
 
+
+    /**
+     * 我加入的项目
+     * @Date: 10:03 2018/2/28
+     */
     @GetMapping("/ams/pro/join")
     public ModelAndView joinPro(){
         ModelAndView modelAndView = new ModelAndView("joinPro");
@@ -73,13 +85,23 @@ public class UIController {
 
 
 
+
+    /**
+     * 左侧菜单
+     * @Date: 10:03 2018/2/28
+     */
     @GetMapping("/ams/pro/menu")
     public ModelAndView projectLeftMenu(){
         ModelAndView modelAndView = new ModelAndView("projectMenu");
         return modelAndView;
     }
-    
-    
+
+
+
+    /**
+     * 项目基本信息
+     * @Date: 10:03 2018/2/28
+     */
     @GetMapping("/ams/pro/base/info/{proId}")
     public ModelAndView baseInfo(@PathVariable Integer proId){
         ModelAndView modelAndView = new ModelAndView("baseInfo");
@@ -89,8 +111,13 @@ public class UIController {
     }
 
 
+
+    /**
+     * 项目角色
+     * @Date: 10:03 2018/2/28
+     */
     @GetMapping("/ams/pro/role/{proId}")
-    public ModelAndView roleManege(@PathVariable Integer proId){
+    public ModelAndView roleManage(@PathVariable Integer proId){
         ModelAndView modelAndView = new ModelAndView("roleManage");
         Project project = projectService.selectById(proId);
         modelAndView.addObject("project",project);
@@ -99,6 +126,23 @@ public class UIController {
 
 
 
+    /**
+     * 项目权限
+     * @Date: 10:03 2018/2/28
+     */
+    @GetMapping("/ams/pro/auth/{proId}")
+    public ModelAndView authManage(@PathVariable Integer proId){
+        ModelAndView modelAndView = new ModelAndView("authManage");
+        Project project = projectService.selectById(proId);
+        modelAndView.addObject("project",project);
+        return modelAndView;
+    }
+
+
+    /**
+     * 项目成员
+     * @Date: 10:03 2018/2/28
+     */
     @GetMapping("/ams/pro/member/{proId}")
     public ModelAndView memberManege(@PathVariable Integer proId){
         ModelAndView modelAndView = new ModelAndView("memberManage");
@@ -123,8 +167,21 @@ public class UIController {
 
 
 
+    /**
+     * 接口权限配置
+     * @Date: 13:56 2018/2/1
+     */
+    @GetMapping("/ams/pro/api/auth/{proId}")
+    public ModelAndView apiAuthManage(@PathVariable Integer proId){
+        ModelAndView modelAndView = new ModelAndView("apiAuthManage");
+        Project project = projectService.selectById(proId);
+        modelAndView.addObject("project",project);
+        return modelAndView;
+    }
 
-    
+
+
+
     /**
      * 消息中心
      * @Date: 17:18 2018/2/1

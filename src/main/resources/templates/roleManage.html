@@ -22,7 +22,8 @@
     <div th:replace="projectMenu::left-menu(2,${project.id})"></div>
 
     <div class="layui-body">
-        <!-- 内容主体区域 -->
+
+
         <div style="padding: 15px;">
             <div class="head-cont">
                 <div class="hpanel">
@@ -34,13 +35,8 @@
                             <div class="layui-inline" style="margin-right: 20px">
                                 <input class="layui-input" name="id" id="roleName" autocomplete="off" />
                             </div>
-                            角色编码：
-                            <div class="layui-inline">
-                                <input class="layui-input" name="id" id="roleCode" autocomplete="off" />
-                            </div>
                             <button class="layui-btn js-search-role" data-type="reload">搜索</button>
 
-                            <button class="layui-btn js-add-role" style="float: right">新增角色</button>
                         </div>
                     </div>
                 </div>
@@ -50,13 +46,25 @@
                     <div class="hpanel-head">
                     </div>
                     <div class="hpanel-body">
-                        <table class="layui-hide" id="my-pro-table" lay-filter="pro-filter">
+                        <div class="tb-btn-group">
+                            <button class="layui-btn layui-btn-small layui-btn-danger">删除</button>
+                            <button class="layui-btn layui-btn-small layui-btn-normal">禁用</button>
+                            <button class="layui-btn layui-btn-small">添加角色</button>
+                        </div>
+                        <table class="layui-hide" id="role-tb" lay-filter="pro-filter">
 
                         </table>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+
     </div>
 
     <div class="layui-footer">
@@ -64,9 +72,20 @@
         © peacebird.com - 太平鸟平台组API管理中心
     </div>
 </div>
-<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
-<script th:src="@{/js/main.js}" charset="utf-8"></script>
 
+
+<script type="text/html" id="switchTpl">
+    <input type="checkbox" name="status"  lay-skin="switch" lay-text="启用|禁用"   />
+</script>
+
+<script type="text/html" id="my-pro-bar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
 
 <script>
     layui.use('table', function(){
@@ -74,19 +93,20 @@
 
         //方法级渲染
         table.render({
-            elem: '#my-pro-table'
+            elem: '#role-tb'
             ,url: '/project/my/list/'
             ,cols: [[
-                {field:'name', title: '角色名称', width:225}
-                ,{field:'name', title: '状态', width:225}
-                ,{field:'status', title: '角色编码', width:108, sort: true}
-                ,{field:'createTime', title: '创建时间', width:144}
-                ,{field:'describes', title: '角色描述',width:300}
+                {checkbox:true}
+                ,{type:'numbers'}
+                ,{field:'username', width:180, title: '角色名称'}
+                ,{field:'sex', width:380, title: '描述'}
+                ,{field:'status', width:105,align:'center', title: '状态',templet: '#switchTpl', unresize: true}
+                ,{width:300, align:'center',title: '操作', toolbar: '#my-pro-bar'}
 
             ]]
-            ,id: 'testReload'
+            ,id: 'roleReload'
             ,page: true
-            ,height: 315
+            ,height: 350
             ,limit:10
 
         });
@@ -114,7 +134,7 @@
         table.on('tool(pro-filter)', function(obj){
             var data = obj.data;
             if(obj.event === 'detail'){
-                window.location.href = "/pro/api/manage/"+data.id;
+                window.location.href = "/ams/pro/base/info/"+data.id;
             } else if(obj.event === 'del'){
                 layer.confirm('真的删除行么', function(index){
                     obj.del();
@@ -128,13 +148,13 @@
 
 
 
-
         $('.layui-body .js-search-pro').on('click', function(){
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
     });
 </script>
+
 
 
 </body>

@@ -17,60 +17,9 @@
 <body>
 
 <div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-logo" style="color: white;">太平鸟API管理平台</div>
-        <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav  layui-layout-left">
-            <li class="layui-nav-item">
-                <a href="">控制台</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">项目管理</a></dd>
-                    <dd><a href="">接口管理</a></dd>
-                    <dd><a href="">接口测试</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="">最新消息<span class="layui-badge-dot"></span></a>
-            </li>
-            <li class="layui-nav-item">
-                <a href="">个人中心</a>
-            </li>
+    <div th:replace="projectMenu::top-menu"></div>
 
-        </ul>
-        <ul class="layui-nav  layui-layout-right">
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <img th:src="@{/img/head.png}" class="layui-nav-img" />
-                    <span th:text="${curUser.getUsername()}"></span>
-                </a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">密码重置</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item"><a th:href="@{/user/logout}" href="">退出</a></li>
-        </ul>
-    </div>
-
-    <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">项目管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a th:href="@{/ams/pro/me}">已创建项目</a></dd>
-                        <dd><a href="javascript:;">已加入项目</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">接口管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">接口权限配置</a></dd>
-                    </dl>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <div th:replace="projectMenu::pc-menu(1)"></div>
 
     <div class="layui-body">
         <!-- 内容主体区域 -->

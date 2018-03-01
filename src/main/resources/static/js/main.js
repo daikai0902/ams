@@ -6,7 +6,7 @@
 
 layui.use(['element','layer','jquery','form'], function(){
     var element = layui.element;
-    var $ = layui.jquery,layer = layui.layer;
+    var $ = layui.jquery,layer = layui.layer,form = layui.form;
 
     $(function(){
 
@@ -66,6 +66,66 @@ layui.use(['element','layer','jquery','form'], function(){
 
             })
         })
+
+
+        $(".js-add-authority").on("click",function(){
+            layer.open({
+                type:1,
+                title:'新增权限',
+                area:['856px', '375px'],
+                content:'<div style="margin-top: 10px;"><form class="layui-form">' +
+                            '<div class="layui-form-item">' +
+                                '<label class="layui-form-label">输入框</label>'+
+                                '<div class="layui-input-block">'+
+                                    '<input type="text" name="title"   lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">'+
+                                '</div>'+
+                            '</div>'+
+                            '<div class="layui-form-item">' +
+                                '<label class="layui-form-label">输入框</label>'+
+                                '<div class="layui-input-block">'+
+                                    '<input type="text" name="title"   lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">'+
+                                '</div>'+
+                            '</div>'+
+
+                            '<div class="layui-form-item">'+
+                                '<label class="layui-form-label">开关</label>'+
+                                '<div class="layui-input-block">'+
+                                    '<input type="checkbox" name="switch" lay-skin="switch" lay-text="ON|OFF" lay-filter="switchTest" value="1">'+
+                                '</div>'+
+                            '</div>'+
+                            '<div class="layui-form-item layui-form-text">'+
+                                '<label class="layui-form-label">文本域</label>'+
+                                '<div class="layui-input-block">'+
+                                    '<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>'+
+                                '</div>'+
+                            '</div>' +
+                        '</form></div>',
+
+
+                btn:['确定','取消'],
+                btnAlign:'c',
+                yes:function(index){
+                    var name = $("#name").val().trim(),
+                        describe = $("#describe").val().trim(),
+                        status = $("#status option:selected").val();
+                    if(name == ""){
+                        tips("#name","项目名称不能为空！");
+                        return;
+                    }
+
+                    $.post("/project/add",{name:name,describe:describe,status:status},function(json){
+                        if(json.status){
+                            window.location.reload();
+                        }
+                    })
+                }
+
+
+            })
+
+
+        })
+
 
 
 

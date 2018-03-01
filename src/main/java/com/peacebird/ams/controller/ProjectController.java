@@ -10,6 +10,7 @@ import com.peacebird.ams.result.ResultT;
 import com.peacebird.ams.service.IProjectService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.RedirectStrategy;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -29,6 +30,7 @@ public class ProjectController {
 
     @Autowired
     private IProjectService projectService;
+
 
 
 
@@ -69,10 +71,25 @@ public class ProjectController {
         List<ProjectVO> projectVOS = ProjectVO.toVOs(projects);
         int count =  projectService.selectCount(ew);
         return new LayResultT(projectVOS,count);
-
-
     }
 
+
+    
+    
+    /**
+     * 编辑项目
+     * @Date: 14:08 2018/2/13
+     */
+    @PostMapping("edit/{proId}")
+    public ResultT editProject(@PathVariable Integer proId,@RequestParam String name,@RequestParam(required = false)String status,
+                               @RequestParam String describes){
+        Project project = projectService.selectById(proId);
+        project.setName(name);
+        project.setStatus(StringUtils.isNotBlank(status) && StringUtils.equals(status,"on")?1:0);
+        project.setDescribes(describes);
+        projectService.editProjectById(project);
+        return ResultT.succed();
+    }
 
 
 
