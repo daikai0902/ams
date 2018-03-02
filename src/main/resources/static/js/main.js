@@ -73,30 +73,30 @@ layui.use(['element','layer','jquery','form'], function(){
                 type:1,
                 title:'新增权限',
                 area:['856px', '375px'],
-                content:'<div style="margin-top: 10px;"><form class="layui-form">' +
+                content:'<div style="margin-top: 10px;margin-right: 30px"><form class="layui-form">' +
                             '<div class="layui-form-item">' +
-                                '<label class="layui-form-label">输入框</label>'+
+                                '<label class="layui-form-label">权限名称</label>'+
                                 '<div class="layui-input-block">'+
-                                    '<input type="text" name="title"   lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">'+
+                                    '<input type="text" id="authName"   lay-verify="required"  autocomplete="off" class="layui-input" >'+
                                 '</div>'+
                             '</div>'+
                             '<div class="layui-form-item">' +
-                                '<label class="layui-form-label">输入框</label>'+
+                                '<label class="layui-form-label">权限路径</label>'+
                                 '<div class="layui-input-block">'+
-                                    '<input type="text" name="title"   lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">'+
+                                    '<input type="text" id="authPath"   lay-verify="required"  autocomplete="off" class="layui-input" >'+
                                 '</div>'+
                             '</div>'+
 
                             '<div class="layui-form-item">'+
                                 '<label class="layui-form-label">开关</label>'+
                                 '<div class="layui-input-block">'+
-                                    '<input type="checkbox" name="switch" lay-skin="switch" lay-text="ON|OFF" lay-filter="switchTest" value="1">'+
+                                    '<input type="checkbox" id="authStatus" lay-skin="switch" lay-text="开启|关闭" >'+
                                 '</div>'+
                             '</div>'+
                             '<div class="layui-form-item layui-form-text">'+
-                                '<label class="layui-form-label">文本域</label>'+
+                                '<label class="layui-form-label">备注</label>'+
                                 '<div class="layui-input-block">'+
-                                    '<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>'+
+                                    '<textarea id="authRemark" placeholder="请输入内容" class="layui-textarea"></textarea>'+
                                 '</div>'+
                             '</div>' +
                         '</form></div>',
@@ -105,15 +105,9 @@ layui.use(['element','layer','jquery','form'], function(){
                 btn:['确定','取消'],
                 btnAlign:'c',
                 yes:function(index){
-                    var name = $("#name").val().trim(),
-                        describe = $("#describe").val().trim(),
-                        status = $("#status option:selected").val();
-                    if(name == ""){
-                        tips("#name","项目名称不能为空！");
-                        return;
-                    }
 
-                    $.post("/project/add",{name:name,describe:describe,status:status},function(json){
+
+                    $.post("/authpro/add",{name:'1',remark:'2222',status:1,url:"222222",projectId:1},function(json){
                         if(json.status){
                             window.location.reload();
                         }

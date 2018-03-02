@@ -38,7 +38,7 @@ public class AuthorityVO  extends BaseVO{
         this.status = authority.getStatus() == 0?"关闭":"开启";
         this.remark = authority.getRemark();
         this.url  = authority.getUrl();
-        this.projectId = authority.getProjectId();
+        this.projectId = authority.getProject_id();
     }
 
 

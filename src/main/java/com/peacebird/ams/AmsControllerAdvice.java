@@ -4,10 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AuthorizationServiceException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,9 +29,11 @@ public class AmsControllerAdvice {
      */
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public @ResponseBody  String errorExceptionHandler(Exception e){
+    public ModelAndView errorExceptionHandler(Exception e){
         logger.info("=============全局异常处理开始============");
-        return e.getMessage();
+        e.printStackTrace();
+        ModelAndView modelAndView = new ModelAndView("500");
+        return modelAndView;
     }
 
 

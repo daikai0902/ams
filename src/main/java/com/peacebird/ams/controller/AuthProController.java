@@ -30,12 +30,14 @@ public class AuthProController {
 
     @PostMapping("/add")
     public ResultT addAuth(@RequestParam String name, @RequestParam String remark,
-                              @RequestParam  Integer status, @RequestParam String url){
+                              @RequestParam  Integer status, @RequestParam String url,
+                           @RequestParam Integer projectId){
         Authority authority = new Authority();
         authority.setName(name);
         authority.setStatus(status);
         authority.setRemark(remark);
         authority.setUrl(url);
+        authority.setProject_id(projectId);
         int result = authorityService.addAuthority(authority);
         if(result >0){
             return ResultT.succed();
@@ -50,7 +52,7 @@ public class AuthProController {
                                 @RequestParam(required = false) String authorityName,@RequestParam Integer projectId){
         EntityWrapper<Authority> ew = new EntityWrapper<Authority>();
         ew.setEntity(new Authority());
-        ew.where("projectId={0}",projectId);
+        ew.where("project_id={0}",projectId);
         if(StringUtils.isNotBlank(authorityName)){
             ew.and().like(" name ",authorityName);
         }

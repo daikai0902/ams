@@ -27,7 +27,7 @@ public class Authority extends Model<Authority>{
 
     private String url;
 
-    private Integer projectId;
+    private Integer project_id;
 
 
     /**
@@ -60,6 +60,14 @@ public class Authority extends Model<Authority>{
         this.status = status;
     }
 
+    public Integer getProject_id() {
+        return project_id;
+    }
+
+    public void setProject_id(Integer project_id) {
+        this.project_id = project_id;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -77,13 +85,7 @@ public class Authority extends Model<Authority>{
     }
 
 
-    public Integer getProjectId() {
-        return projectId;
-    }
 
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
-    }
 
 
 
